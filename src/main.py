@@ -11,19 +11,26 @@ async def speech_to_text(audio):
     return "Hola, ¿cómo estás?"
 
 async def call_llm(text):
-    print("🧠 Procesando con LLM...")
+    print("🧠 Procesando respuesta con LLM...")
     await asyncio.sleep(1)
     return "Estoy bien, ¿en qué puedo ayudarte?"
 
 async def text_to_speech(response):
-    print("🔊 Convirtiendo texto a voz...")
+    print("🔊 Convirtiendo respuesta a voz...")
     await asyncio.sleep(1)
 
 async def main_loop():
     while True:
+        print("\n🎙️ Esperando interacción del usuario...\n")
+
         audio = await record_audio()
+
         text = await speech_to_text(audio)
+        print(f"👤 Usuario: {text}")
+
         response = await call_llm(text)
+        print(f"🤖 Asistente: {response}")
+
         await text_to_speech(response)
 
 if __name__ == "__main__":
